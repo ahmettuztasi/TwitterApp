@@ -6,12 +6,32 @@
 //  Copyright © 2019 Ahmet Tuztașı. All rights reserved.
 //
 
-import UIKit
+import LBTAComponents
 
-class TweetViewController: UIViewController {
+class TweetViewController: DatasourceController {
+    
+    let tweetCellId = "tweetCellId"
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+        
+        collectionView?.backgroundColor = .white
+        collectionView?.register(TweetCell.self, forCellWithReuseIdentifier: tweetCellId)
+        
+        let userDatasource = UserDatasource()
+        self.datasource = userDatasource
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 20
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: tweetCellId, for: indexPath)
+        return userCell
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width , height: 150)
     }
 }

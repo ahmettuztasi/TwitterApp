@@ -30,4 +30,8 @@ class UserViewController: DatasourceController {
         let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: userCellId, for: indexPath)
         return userCell
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width , height: 170)
+    }
 }

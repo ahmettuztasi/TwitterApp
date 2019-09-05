@@ -24,8 +24,8 @@ open class DatasourceController: UICollectionViewController, UICollectionViewDel
     
     open var datasource: Datasource? {
         didSet {
-            if let cellClasses = datasource?.cellClasses() {
-                for cellClass in cellClasses {
+            if let userCellClasses = datasource?.userCellClasses() {
+                for cellClass in userCellClasses {
                     collectionView?.register(cellClass, forCellWithReuseIdentifier: NSStringFromClass(cellClass))
                 }
             }
@@ -91,10 +91,10 @@ open class DatasourceController: UICollectionViewController, UICollectionViewDel
         
         if let cls = datasource?.cellClass(indexPath) {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(cls), for: indexPath) as! DatasourceCell
-        } else if let cellClasses = datasource?.cellClasses(), cellClasses.count > indexPath.section {
+        } else if let cellClasses = datasource?.userCellClasses(), cellClasses.count > indexPath.section {
             let cls = cellClasses[indexPath.section]
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(cls), for: indexPath) as! DatasourceCell
-        } else if let cls = datasource?.cellClasses().first {
+        } else if let cls = datasource?.userCellClasses().first {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: NSStringFromClass(cls), for: indexPath) as! DatasourceCell
         } else {
             cell = collectionView.dequeueReusableCell(withReuseIdentifier: defaultCellId, for: indexPath) as! DatasourceCell

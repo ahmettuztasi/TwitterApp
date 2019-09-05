@@ -31,22 +31,24 @@ class UserCell: DatasourceCell {
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Brian Voong"
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.backgroundColor = .clear
         return label
     }()
     
     let usernameLabel: UILabel = {
         let label = UILabel()
         label.text = "@buildthatapp"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = UIColor(r: 130, g: 130, b: 130)
+        label.backgroundColor = .clear
         return label
     }()
     
     let bioTextView: UITextView = {
         let textView = UITextView()
-        textView.text = "iPhone, iPad, iOS Programming Community. Join us to learn Swift, Objective-C and build iOS apps!"
-        textView.font = UIFont.systemFont(ofSize: 15)
+        textView.text = "Swift is friendly to new programmers. It’s an industrial-quality programming language that’s as expressive and enjoyable as a scripting language. Writing Swift code in a playground lets you experiment with code."
+        textView.font = UIFont.systemFont(ofSize: 18)
         textView.backgroundColor = .clear
         return textView
     }()

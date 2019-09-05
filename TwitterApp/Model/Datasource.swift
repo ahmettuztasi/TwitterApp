@@ -26,8 +26,12 @@ class UserDatasource: Datasource {
         return [brianUser!, rayUser!]
     }()
     
-    override func cellClasses() -> [DatasourceCell.Type] {
+    override func userCellClasses() -> [DatasourceCell.Type] {
         return [UserCell.self]
+    }
+    
+    override func tweetCellClasses() -> [DatasourceCell.Type] {
+        return [TweetCell.self]
     }
     
     override func item(_ indexPath: IndexPath) -> Any? {

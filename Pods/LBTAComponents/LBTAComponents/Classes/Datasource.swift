@@ -16,10 +16,13 @@ open class Datasource: NSObject {
     public var objects: [Any]?
     
     ///The cell classes that will be used to render out each section.
-    open func cellClasses() -> [DatasourceCell.Type] {
+    open func userCellClasses() -> [DatasourceCell.Type] {
         return []
     }
     
+    open func tweetCellClasses() -> [DatasourceCell.Type] {
+        return []
+    }
     ///If you want more fine tuned control per row, override this method to provide the proper cell type that should be rendered
     open func cellClass(_ indexPath: IndexPath) -> DatasourceCell.Type? {
         return nil
