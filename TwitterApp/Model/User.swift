@@ -6,7 +6,7 @@
 //  Copyright © 2019 Ahmet Tuztașı. All rights reserved.
 //
 
-import UIKit
+import LBTAComponents
 
 class User {
     
