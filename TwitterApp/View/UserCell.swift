@@ -8,15 +8,15 @@
 
 import LBTAComponents
 
-class UserCell: DatasourceCell {
+class UserCell: DatasourceCell{
     
     override var datasourceItem: Any? {
         didSet {
             guard let user = datasourceItem as? User else { return }
-            nameLabel.text = user.name
-            usernameLabel.text = user.userName
-            bioTextView.text = user.bioText
-            profileImageView.image = user.profileImage
+            nameLabel.text = String(user.firstName)
+            usernameLabel.text = user.lastName
+            bioTextView.text = user.profile
+            //profileImageView.image = user.profileImage
         }
     }
     
@@ -28,7 +28,7 @@ class UserCell: DatasourceCell {
         return imageView
     }()
     
-    let nameLabel: UILabel = {
+    var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Brian Voong"
         label.font = UIFont.boldSystemFont(ofSize: 20)
@@ -36,7 +36,7 @@ class UserCell: DatasourceCell {
         return label
     }()
     
-    let usernameLabel: UILabel = {
+    var usernameLabel: UILabel = {
         let label = UILabel()
         label.text = "@buildthatapp"
         label.font = UIFont.systemFont(ofSize: 18)
@@ -45,7 +45,7 @@ class UserCell: DatasourceCell {
         return label
     }()
     
-    let bioTextView: UITextView = {
+    var bioTextView: UITextView = {
         let textView = UITextView()
         textView.text = "Swift is friendly to new programmers. It’s an industrial-quality programming language that’s as expressive and enjoyable as a scripting language. Writing Swift code in a playground lets you experiment with code."
         textView.font = UIFont.systemFont(ofSize: 18)
@@ -67,6 +67,9 @@ class UserCell: DatasourceCell {
     }()
     
     override func setupViews() {
+        super.setupViews()
+       
+        backgroundColor = .white
         
         separatorLineView.isHidden = false
         separatorLineView.backgroundColor = UIColor(r: 230, g: 230, b: 230)

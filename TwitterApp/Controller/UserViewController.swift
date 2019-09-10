@@ -6,32 +6,64 @@
 //  Copyright © 2019 Ahmet Tuztașı. All rights reserved.
 //
 
+import UIKit
 import LBTAComponents
+import SwiftyJSON
+import Alamofire
 
-class UserViewController: DatasourceController {
+class UserViewController: DatasourceController, UserDelegate {
     
     let userCellId = "userCellId"
+    
+    var users : [User]? {
+        didSet { collectionView?.reloadData()}
+    }
+    
+    func getUsers(userList: [User]) {
+        self.users = userList
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        
+        let service = Service(delegate: self)
+        service.getAllUsers()
+        
         collectionView?.backgroundColor = .white
         collectionView?.register(UserCell.self, forCellWithReuseIdentifier: userCellId)
-        
-        let userDatasource = UserDatasource()
-        self.datasource = userDatasource
     }
     
+    override func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return users?.count ?? 0
     }
-    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: userCellId, for: indexPath)
-        return userCell
+        let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: userCellId, for: indexPath) as? UserCell
+        
+        userCell?.nameLabel.text = users?[indexPath.item].firstName
+        userCell?.bioTextView.text = users?[indexPath.item].lastName
+        userCell?.usernameLabel.text = users?[indexPath.item].profile
+        
+        return userCell!
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width , height: 170)
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        //send data userView to TweetView
+        let tweetViewController = TweetViewController()
+        let delege : MyDataSendingDelegate?
+        delege = tweetViewController
+        delege?.sendDataToTweetController(delege: (users?[indexPath.item].id)!)
+        
+        self.present(tweetViewController, animated: true, completion: nil)
     }
 }

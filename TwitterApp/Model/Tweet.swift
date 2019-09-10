@@ -8,21 +8,19 @@
 
 import UIKit
 
-class Tweet {
+class Tweet:  Decodable {
+    let id: Int
+    let firstName: String
+    let lastName: String
+    let profile: String
+    let tweetText: String
     
-    //MARK: Properties
-    let user: User
-    let message: String
-    
-    //MARK: Initialization
-    init?(user: User, message: String){
-        
-        if message.isEmpty {
-            return nil
-        }
-        
-        //Initialize stored properties
-        self.user = user
-        self.message = message
+    init(id: Int, firstName: String, lastName: String, profile: String, tweetText: String) {
+        self.id = id
+        self.firstName = firstName
+        self.lastName = lastName
+        self.profile = profile
+        self.tweetText = tweetText
     }
 }
+

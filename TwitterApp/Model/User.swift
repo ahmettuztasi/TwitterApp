@@ -1,32 +1,23 @@
 //
-//  User.swift
+//  GetAllUserRM.swift
 //  TwitterApp
 //
-//  Created by Ahmet Tuztașı on 05/09/2019.
+//  Created by Ahmet Tuztașı on 07/09/2019.
 //  Copyright © 2019 Ahmet Tuztașı. All rights reserved.
 //
 
-import LBTAComponents
+import Foundation
 
-class User {
+class User:  Decodable {
+    let id: Int
+    let firstName: String
+    let lastName: String
+    let profile: String
     
-    //MARK: Properties
-    let name: String
-    let userName: String
-    let bioText: String
-    let profileImage: UIImage?
-    
-    //MARK: Initialization
-    init?(name: String, userName: String, bioText: String, profileImage: UIImage){
-        
-        if name.isEmpty || userName.isEmpty || bioText.isEmpty{
-            return nil
-        }
-        
-        //Initialize stored properties
-        self.name = name
-        self.userName = userName
-        self.bioText = bioText
-        self.profileImage = profileImage
+    init(id: Int, firstName: String, lastName: String, profile: String) {
+        self.id = id
+        self.firstName = firstName
+        self.lastName = lastName
+        self.profile = profile
     }
 }

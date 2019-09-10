@@ -7,6 +7,7 @@ target 'TwitterApp' do
 
   # Pods for TwitterApp
 
-  pod ‘LBTAComponents’, ‘~> 0.1.9’
-
+  pod ‘LBTAComponents’, ‘~> 1.0.0’
+  pod 'SwiftyJSON', '~> 4.2’
+  pod 'Alamofire', '~> 4.0.0’
 end
