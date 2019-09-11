@@ -11,17 +11,26 @@ import LBTAComponents
 import SwiftyJSON
 import Alamofire
 
-class UserViewController: DatasourceController, UserDelegate {
+class UserViewController: DatasourceController, ConnectionDelegate {
+    
     
     let userCellId = "userCellId"
-    let headerCellId = "headerCellId"
     
     var users : [User]? {
         didSet { collectionView?.reloadData()}
     }
     
-    func getUsers(userList: [User]) {
-        self.users = userList
+    func successConnection(response: Data) {
+        do{
+            let responseModel = try JSONDecoder().decode([User].self, from: response)
+            self.users = responseModel
+        }catch{
+            
+        }
+    }
+    
+    func errorConnection(message: String) {
+        print(message)
     }
     
     override func viewDidLoad() {
@@ -31,7 +40,8 @@ class UserViewController: DatasourceController, UserDelegate {
         collectionView?.dataSource = self
         
         let service = Service(delegate: self)
-        service.getAllUsers()
+        let headers = ["Content-Type":"application/json"]
+        service.connectService(baseUrl: "http://localhost:3000/users", method: .get, header: headers, body: nil)
         
         collectionView?.backgroundColor = .white
         collectionView?.register(UserCell.self, forCellWithReuseIdentifier: userCellId)
@@ -60,7 +70,7 @@ class UserViewController: DatasourceController, UserDelegate {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         //send data userView to TweetView
         let tweetViewController = TweetViewController()
-        let delege : MyDataSendingDelegate?
+        let delege : SendingDataUserVCtoTweetVC?
         delege = tweetViewController
         delege?.sendDataToTweetController(delege: (users?[indexPath.item].id)!)
         

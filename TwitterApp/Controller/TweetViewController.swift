@@ -9,7 +9,7 @@
 import LBTAComponents
 
 
-class TweetViewController: DatasourceController, MyDataSendingDelegate, ConnectionDelegate {
+class TweetViewController: DatasourceController, SendingDataUserVCtoTweetVC, ConnectionDelegate {
   
     let tweetCellId = "tweetCellId"
     let headerCellId = "headerCellId"
@@ -23,7 +23,6 @@ class TweetViewController: DatasourceController, MyDataSendingDelegate, Connecti
     }
     
     func successConnection(response: Data) {
-        print("Response \(response)")
         do {
             self.tweet = try JSONDecoder().decode([Tweet].self, from: response)
         } catch { print(error)}

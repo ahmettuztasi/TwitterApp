@@ -12,18 +12,9 @@ import Alamofire
 
 class Service {
     
-    var dataUsers: UserDelegate?
-    var dataTweets: TweetDelegate?
     var conDel: ConnectionDelegate?
     
-    init(delegate: UserDelegate) {
-        self.dataUsers = delegate
-    }
-    
-    init(delegate: TweetDelegate) {
-        self.dataTweets = delegate
-    }
-    
+
     init(delegate: ConnectionDelegate) {
         self.conDel = delegate
     }
@@ -35,54 +26,15 @@ class Service {
             switch response.result {
             case .success( _): do {
                 self.conDel?.successConnection(response: response.data!)
-               
-                
-            } catch { self.conDel?.errorConnection(message: "bir sorun oluştu")}
+            }
                 
             case .failure(let error): do {
-                
                 self.conDel?.errorConnection(message: error.localizedDescription)
-                
                 }
-                
             }
         }
     }
     
-    func getAllUsers() {
-        let headers = ["Content-Type":"application/json"]
-        request("http://localhost:3000/users", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
-            
-            switch response.result {
-            case .success( _): do {
-                
-                let responseModel = try JSONDecoder().decode([User].self, from: response.data!)
-                self.dataUsers?.getUsers(userList: responseModel)
-                
-            } catch { print(error)}
-                
-            case .failure(let error): do {print(error)}
-                
-            }
-        }
-    }
-    
-    func getTweetById(id: Int) {
-        let headers = ["Content-Type":"application/json"]
-        request("http://localhost:3000/tweets/\(id)", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
-            
-            switch response.result {
-            case .success( _): do {
-                
-                let responseModel = try JSONDecoder().decode(Tweet.self, from: response.data!)
-                self.dataTweets?.getTweet(tweet: responseModel)
-                
-            } catch { print(error)}
-                
-            case .failure(let error): do {print(error)}
-                
-            }
-        }
-    }
+   
 }
 
