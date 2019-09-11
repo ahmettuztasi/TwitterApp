@@ -30,7 +30,7 @@ class UserViewController: DatasourceController, ConnectionDelegate {
     }
     
     func errorConnection(message: String) {
-        print(message)
+        print("errorConnection: \(message)")
     }
     
     override func viewDidLoad() {

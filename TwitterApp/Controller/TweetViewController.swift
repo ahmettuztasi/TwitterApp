@@ -8,14 +8,31 @@
 
 import LBTAComponents
 
-
 class TweetViewController: DatasourceController, SendingDataUserVCtoTweetVC, ConnectionDelegate {
   
     let tweetCellId = "tweetCellId"
     let headerCellId = "headerCellId"
     
+    //User a ait tweet yok ise exception fırlatır.
     var userId: Int? {
-        didSet {getTweetById(id: userId!)}
+        didSet {
+            do{
+                if (try checkUserId(id: userId)) {
+                    getTweetById(id: userId!)
+                }
+            }
+            catch Check.Id(let err) {
+                print(err)
+                Toast(text: "User'a ait tweet bulunamadı", delay: 0, duration: 1).show()
+                let appearence = ToastView.appearance()
+                appearence.backgroundColor = UIColor.blue
+                appearence.textColor = UIColor.white
+                appearence.font = UIFont.boldSystemFont(ofSize: 20)
+                appearence.cornerRadius = 14
+            } catch {
+                
+            }
+        }
     }
     
     var tweet : [Tweet]? {
@@ -39,10 +56,17 @@ class TweetViewController: DatasourceController, SendingDataUserVCtoTweetVC, Con
     func getTweet(tweet: [Tweet]) {
         self.tweet = tweet
     }
+    
+    //User'a ait tweet'in var olup olmadıgını kontrol eder
+    func checkUserId(id: Int?) throws -> Bool {
+        if id == nil {
+            throw Check.Id(errmsg: "id bos olamaz")
+        }
+        return true
+    }
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         collectionView?.backgroundColor = .white
         collectionView?.register(TweetCell.self, forCellWithReuseIdentifier: tweetCellId)
         collectionView?.register(HeaderCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerCellId)

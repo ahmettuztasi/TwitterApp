@@ -14,7 +14,6 @@ class Service {
     
     var conDel: ConnectionDelegate?
     
-
     init(delegate: ConnectionDelegate) {
         self.conDel = delegate
     }
@@ -28,13 +27,11 @@ class Service {
                 self.conDel?.successConnection(response: response.data!)
             }
                 
-            case .failure(let error): do {
-                self.conDel?.errorConnection(message: error.localizedDescription)
+            case .failure( _): do {
+                self.conDel?.errorConnection(message: "Bağlantı gerçekleştirelemedi")
                 }
             }
         }
     }
-    
-   
 }
 
