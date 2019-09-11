@@ -10,16 +10,6 @@ import LBTAComponents
 
 class UserCell: DatasourceCell{
     
-    override var datasourceItem: Any? {
-        didSet {
-            guard let user = datasourceItem as? User else { return }
-            nameLabel.text = String(user.firstName)
-            usernameLabel.text = user.lastName
-            bioTextView.text = user.profile
-            //profileImageView.image = user.profileImage
-        }
-    }
-    
     let profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = #imageLiteral(resourceName: "boy")

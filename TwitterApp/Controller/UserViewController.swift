@@ -14,6 +14,7 @@ import Alamofire
 class UserViewController: DatasourceController, UserDelegate {
     
     let userCellId = "userCellId"
+    let headerCellId = "headerCellId"
     
     var users : [User]? {
         didSet { collectionView?.reloadData()}
@@ -22,7 +23,6 @@ class UserViewController: DatasourceController, UserDelegate {
     func getUsers(userList: [User]) {
         self.users = userList
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,4 +66,5 @@ class UserViewController: DatasourceController, UserDelegate {
         
         self.present(tweetViewController, animated: true, completion: nil)
     }
+    
 }

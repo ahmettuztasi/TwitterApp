@@ -12,20 +12,21 @@ class CustomTabBarController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupTabBar()
     }
     
     func setupTabBar() {
         let userViewController = UserViewController()
         userViewController.tabBarItem.image = UIImage(named: "homepage")
+        userViewController.title = "Users"
         //homePageController.tabBarItem.selectedImage = UIImage(named: "homepageBlack")
         
-        let tweetViewController = TweetViewController()
-        tweetViewController.tabBarItem.image = UIImage(named: "categories")
+        //let tweetViewController = TweetViewController()
+        //tweetViewController.tabBarItem.image = UIImage(named: "categories")
+        //tweetViewController.title = "Tweets"
         //myFavoritesController.tabBarItem.selectedImage = UIImage(named: "categroiesBlack")
         
-        viewControllers = [userViewController, tweetViewController]
+        viewControllers = [userViewController]
     }
 }
 

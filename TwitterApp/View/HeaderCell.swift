@@ -8,23 +8,21 @@
 
 import LBTAComponents
 
-class HeaderCell: UITableViewCell {
+class HeaderCell: DatasourceCell {
     
-    private let productNameLabel : UILabel = {
-        let lbl = UILabel()
-        lbl.textColor = .black
-        lbl.font = UIFont.boldSystemFont(ofSize: 16)
-        lbl.textAlignment = .left
-        lbl.backgroundColor = .red
-        return lbl
+    var backButton : UIButton = {
+        let button = UIButton()
+        
+        button.backgroundColor = UIColor.red
+        return button
     }()
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier:reuseIdentifier)
-        addSubview(productNameLabel)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    override func setupViews() {
+        super.setupViews()
+        
+        backgroundColor = .white
+        
+        addSubview(backButton)
+        backButton.anchor(self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, topConstant: 4, leftConstant: 2, bottomConstant: 4, rightConstant: 0, widthConstant: 50, heightConstant: 40)
     }
 }

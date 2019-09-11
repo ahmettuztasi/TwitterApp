@@ -27,6 +27,7 @@ class Service {
     init(delegate: ConnectionDelegate) {
         self.conDel = delegate
     }
+    
     func connectService(baseUrl: String, method: HTTPMethod, header: Dictionary<String, String>, body: Any?) {
         
         request(baseUrl, method: method, parameters: nil, encoding: JSONEncoding.default, headers: header).responseJSON{ response in
@@ -47,6 +48,7 @@ class Service {
             }
         }
     }
+    
     func getAllUsers() {
         let headers = ["Content-Type":"application/json"]
         request("http://localhost:3000/users", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON{ response in
