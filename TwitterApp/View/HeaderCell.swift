@@ -9,20 +9,5 @@
 import LBTAComponents
 
 class HeaderCell: DatasourceCell {
-    
-    var backButton : UIButton = {
-        let button = UIButton()
-        
-        button.backgroundColor = UIColor.red
-        return button
-    }()
-    
-    override func setupViews() {
-        super.setupViews()
-        
-        backgroundColor = .white
-        
-        addSubview(backButton)
-        backButton.anchor(self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, topConstant: 4, leftConstant: 2, bottomConstant: 4, rightConstant: 0, widthConstant: 50, heightConstant: 40)
-    }
+ 
 }

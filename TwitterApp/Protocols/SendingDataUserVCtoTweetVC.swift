@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol SendingDataUserVCtoTweetVC {
-    func sendDataToTweetController(delege: Int)
+protocol SendingDataTweetVCtoUserVC {
+    func sendDataToUserController(delege: Int)
 }

@@ -20,7 +20,7 @@ class UserCell: DatasourceCell{
     
     var nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Brian Voong"
+        label.text = ""
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.backgroundColor = .clear
         return label
@@ -28,7 +28,7 @@ class UserCell: DatasourceCell{
     
     var usernameLabel: UILabel = {
         let label = UILabel()
-        label.text = "@buildthatapp"
+        label.text = ""
         label.font = UIFont.systemFont(ofSize: 18)
         label.textColor = UIColor(r: 130, g: 130, b: 130)
         label.backgroundColor = .clear
@@ -37,7 +37,7 @@ class UserCell: DatasourceCell{
     
     var bioTextView: UITextView = {
         let textView = UITextView()
-        textView.text = "Swift is friendly to new programmers. It’s an industrial-quality programming language that’s as expressive and enjoyable as a scripting language. Writing Swift code in a playground lets you experiment with code."
+        textView.text = ""
         textView.font = UIFont.systemFont(ofSize: 18)
         textView.backgroundColor = .clear
         return textView

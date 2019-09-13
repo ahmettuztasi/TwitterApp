@@ -15,18 +15,29 @@ class CustomTabBarController: UITabBarController {
         setupTabBar()
     }
     
+    
     func setupTabBar() {
-        let userViewController = UserViewController()
-        userViewController.tabBarItem.image = UIImage(named: "homepage")
-        userViewController.title = "Users"
+        let tweetViewController =  TweetViewController()
+        tweetViewController.tabBarItem.image = UIImage(named: "homepage")
+        //tweetViewController.title = "Tweets"
         //homePageController.tabBarItem.selectedImage = UIImage(named: "homepageBlack")
         
-        //let tweetViewController = TweetViewController()
-        //tweetViewController.tabBarItem.image = UIImage(named: "categories")
-        //tweetViewController.title = "Tweets"
-        //myFavoritesController.tabBarItem.selectedImage = UIImage(named: "categroiesBlack")
+        let searchViewController = SearchVC()
+        searchViewController.tabBarItem.image = UIImage(named: "categories")
+        //searchViewController.title = "Categories"
+        //searchViewController.tabBarItem.selectedImage = UIImage(named: "categroiesBlack")
         
-        viewControllers = [userViewController]
+        let notificationViewController = NotificationVC()
+        notificationViewController.tabBarItem.image = UIImage(named: "notification")
+        //notificationViewController.title = "Notifications"
+        //searchViewController.tabBarItem.selectedImage = UIImage(named: "categroiesBlack")
+        
+        let inBoxViewController = InBoxVC()
+        inBoxViewController.tabBarItem.image = UIImage(named: "inbox")
+        //inBoxViewController.title = "InBox"
+        //searchViewController.tabBarItem.selectedImage = UIImage(named: "categroiesBlack")
+        
+        viewControllers = [tweetViewController, searchViewController, notificationViewController, inBoxViewController]
     }
 }
 

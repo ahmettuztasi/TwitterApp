@@ -27,6 +27,10 @@
 		578818D92329B31E005145D9 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578818D52329B31E005145D9 /* Toast.swift */; };
 		578818DA2329B31E005145D9 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578818D62329B31E005145D9 /* ToastView.swift */; };
 		578818DB2329B31E005145D9 /* ToastCenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578818D72329B31E005145D9 /* ToastCenter.swift */; };
+		57ABED1D232AF454004A2A97 /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ABED1C232AF454004A2A97 /* SearchVC.swift */; };
+		57ABED1F232AF470004A2A97 /* NotificationVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ABED1E232AF470004A2A97 /* NotificationVC.swift */; };
+		57ABED21232AF488004A2A97 /* InBoxVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ABED20232AF488004A2A97 /* InBoxVC.swift */; };
+		57ABED23232BF891004A2A97 /* HeaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ABED22232BF891004A2A97 /* HeaderViewController.swift */; };
 		57BB4B2D232810DB00913FAE /* ConnectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57BB4B2C232810DB00913FAE /* ConnectionDelegate.swift */; };
 		686FBC80EA9B3526C4BFE19C /* Pods_TwitterApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6F4F5F38F898E39E97F88D5A /* Pods_TwitterApp.framework */; };
 /* End PBXBuildFile section */
@@ -76,6 +80,10 @@
 		578818D52329B31E005145D9 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Toast.swift; path = "../../../../../Downloads/How to use Toast/How to use Toast/Toast/Toast.swift"; sourceTree = "<group>"; };
 		578818D62329B31E005145D9 /* ToastView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToastView.swift; path = "../../../../../Downloads/How to use Toast/How to use Toast/Toast/ToastView.swift"; sourceTree = "<group>"; };
 		578818D72329B31E005145D9 /* ToastCenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToastCenter.swift; path = "../../../../../Downloads/How to use Toast/How to use Toast/Toast/ToastCenter.swift"; sourceTree = "<group>"; };
+		57ABED1C232AF454004A2A97 /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
+		57ABED1E232AF470004A2A97 /* NotificationVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationVC.swift; sourceTree = "<group>"; };
+		57ABED20232AF488004A2A97 /* InBoxVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InBoxVC.swift; sourceTree = "<group>"; };
+		57ABED22232BF891004A2A97 /* HeaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderViewController.swift; sourceTree = "<group>"; };
 		57BB4B2C232810DB00913FAE /* ConnectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionDelegate.swift; sourceTree = "<group>"; };
 		6898DDA341127B6A1236CBAE /* Pods-TwitterApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TwitterApp.debug.xcconfig"; path = "Target Support Files/Pods-TwitterApp/Pods-TwitterApp.debug.xcconfig"; sourceTree = "<group>"; };
 		6F4F5F38F898E39E97F88D5A /* Pods_TwitterApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TwitterApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -191,6 +199,10 @@
 				5734D93823216B1E001F5221 /* CustomTabBarController.swift */,
 				5734D93A23216B2E001F5221 /* TweetViewController.swift */,
 				5734D93C23216B4B001F5221 /* UserViewController.swift */,
+				57ABED1C232AF454004A2A97 /* SearchVC.swift */,
+				57ABED1E232AF470004A2A97 /* NotificationVC.swift */,
+				57ABED20232AF488004A2A97 /* InBoxVC.swift */,
+				57ABED22232BF891004A2A97 /* HeaderViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -432,13 +444,17 @@
 				5753DC222321DD5000CD9E35 /* Service.swift in Sources */,
 				571A51312327198300519E6E /* SendingDataUserVCtoTweetVC.swift in Sources */,
 				5734D93B23216B2E001F5221 /* TweetViewController.swift in Sources */,
+				57ABED21232AF488004A2A97 /* InBoxVC.swift in Sources */,
+				57ABED1F232AF470004A2A97 /* NotificationVC.swift in Sources */,
 				5734D93D23216B4B001F5221 /* UserViewController.swift in Sources */,
+				57ABED23232BF891004A2A97 /* HeaderViewController.swift in Sources */,
 				578818DB2329B31E005145D9 /* ToastCenter.swift in Sources */,
 				578818C62329A1AF005145D9 /* CheckValid.swift in Sources */,
 				57698E3E232422CF00D9D091 /* User.swift in Sources */,
 				578818D92329B31E005145D9 /* Toast.swift in Sources */,
 				5734D93723216B06001F5221 /* HeaderCell.swift in Sources */,
 				5734D93323216AED001F5221 /* TweetCell.swift in Sources */,
+				57ABED1D232AF454004A2A97 /* SearchVC.swift in Sources */,
 				5734D93123216AE3001F5221 /* UserCell.swift in Sources */,
 				5734D92F23216A58001F5221 /* Tweet.swift in Sources */,
 				578818D82329B31E005145D9 /* ToastWindow.swift in Sources */,
