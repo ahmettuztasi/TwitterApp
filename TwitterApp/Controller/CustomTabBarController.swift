@@ -13,6 +13,9 @@ class CustomTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBar()
+        
+        //transition effect
+        self.modalTransitionStyle = .crossDissolve
     }
     
     

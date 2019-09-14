@@ -26,6 +26,7 @@ class TweetViewController: DatasourceController, ConnectionDelegate {
     func successConnection(response: Data) {
         do {
             self.tweet = try JSONDecoder().decode([Tweet].self, from: response)
+            collectionView?.reloadData()
         } catch { print(error)}
     }
     
@@ -33,10 +34,6 @@ class TweetViewController: DatasourceController, ConnectionDelegate {
         print("Response \(message)")
     }
 
-    func getTweet(tweet: [Tweet]) {
-        self.tweet = tweet
-    }
-    
     func getTweets() {
         let service = Service(delegate: self)
         let headers = ["Content-Type":"application/json"]
@@ -51,7 +48,7 @@ class TweetViewController: DatasourceController, ConnectionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
-        
+        collectionView?.reloadData()
         collectionView?.backgroundColor = .white
         collectionView?.register(TweetCell.self, forCellWithReuseIdentifier: tweetCellId)
         collectionView?.register(HeaderCell.self, forCellWithReuseIdentifier: headerCellId)
@@ -76,6 +73,8 @@ class TweetViewController: DatasourceController, ConnectionDelegate {
             let tweetCell = collectionView.dequeueReusableCell(withReuseIdentifier: tweetCellId, for: indexPath) as! TweetCell
             if(self.tweet != nil){
                 tweetCell.messageTextView.text = self.tweet![indexPath.item].tweetText
+                tweetCell.fullNameTextView.text = String(self.tweet![indexPath.item].firstName + " " + self.tweet![indexPath.item].lastName)
+                tweetCell.userNameTextView.text = String(self.tweet![indexPath.item].profile)
             }
             return tweetCell
         }
