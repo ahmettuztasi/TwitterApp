@@ -92,43 +92,32 @@ class UserViewController: DatasourceController, ConnectionDelegate, SendingDataT
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return (section == 0) ? 1 : 1
+        return 1
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: userCellId, for: indexPath) as? UserCell
         
-        if indexPath.section == 0 {
-            let headerCell = collectionView.dequeueReusableCell(withReuseIdentifier: headerCellId, for: indexPath) as? HeaderCell
-            
-            return headerCell!
-        }else{
-            let userCell = collectionView.dequeueReusableCell(withReuseIdentifier: userCellId, for: indexPath) as? UserCell
-            
-            let fullName: String
-            
-            if user?.firstName != nil && user?.lastName != nil {
-                fullName = "\(String(describing: user!.firstName)) \(String(describing: user!.lastName))"
-                userCell?.nameLabel.text = String(fullName)
-            }
-            if user?.age != nil{
-                userCell?.bioTextView.text = "I am \(user!.age) years old"
-            }
-            userCell?.usernameLabel.text = user?.profile
-            
-            return userCell!
+        let fullName: String
+        
+        if user?.firstName != nil && user?.lastName != nil {
+            fullName = "\(String(describing: user!.firstName)) \(String(describing: user!.lastName))"
+            userCell?.nameLabel.text = String(fullName)
         }
+        if user?.age != nil{
+            userCell?.bioTextView.text = "I am \(user!.age) years old"
+        }
+        userCell?.usernameLabel.text = user?.profile
+        
+        return userCell!
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if indexPath.section == 0 {
-            return CGSize(width: view.frame.width , height: 50)
-        }else {
-            return CGSize(width: view.frame.width , height: view.frame.height/2)
-        }
+        return CGSize(width: view.frame.width , height: view.frame.height/2)
     }
 }
 
@@ -136,30 +125,21 @@ class UserViewController: DatasourceController, ConnectionDelegate, SendingDataT
 
 extension UserViewController {
     private func setupNavBar() {
-        let titleImageView = UIImageView(image: #imageLiteral(resourceName: "title_icon"))
-        titleImageView.frame = CGRect(x: view.frame.width/2 - 17, y: 4, width: 34, height: 34)
-        titleImageView.contentMode = .scaleAspectFit
         
         let navBar=UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
-        navBar.backgroundColor = .white
+        navBar.backgroundColor = .clear
         
         let followButton = UIButton(type: .system)
-        followButton.setImage(#imageLiteral(resourceName: "backward").withRenderingMode(.alwaysOriginal), for: .normal)
-        followButton.frame = CGRect(x: 4, y: 4, width: 34, height: 34)
-        followButton.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        
-        let searchButton = UIButton(type: .system)
-        searchButton.setImage(#imageLiteral(resourceName: "search").withRenderingMode(.alwaysOriginal), for: .normal)
-        searchButton.frame = CGRect(x: view.frame.width - 38 - 2 - 34, y: 4, width: 34, height: 34)
+        followButton.setImage(#imageLiteral(resourceName: "back").withRenderingMode(.alwaysOriginal), for: .normal)
+        followButton.frame = CGRect(x: 8, y: 8, width: 25, height: 25)
+        followButton.addTarget(self, action: #selector(goBack), for: .touchDown)
         
         let composeButton = UIButton(type: .system)
-        composeButton.setImage(#imageLiteral(resourceName: "compose").withRenderingMode(.alwaysOriginal), for: .normal)
-        composeButton.frame = CGRect(x: view.frame.width - 38, y: 4, width: 34, height: 34)
+        composeButton.setImage(#imageLiteral(resourceName: "more").withRenderingMode(.alwaysOriginal), for: .normal)
+        composeButton.frame = CGRect(x: view.frame.width - 38, y: 8, width: 34, height: 25)
         
         self.view.addSubview(navBar)
-        self.view.addSubview(titleImageView)
         self.view.addSubview(followButton)
-        self.view.addSubview(searchButton)
         self.view.addSubview(composeButton)
     }
     
