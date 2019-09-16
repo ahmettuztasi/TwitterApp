@@ -8,6 +8,12 @@
 
 import Foundation
 
+enum ServiceError: Error {
+    case Failure(errmsg: String)
+}
+
 enum Check: Error{
     case Id(errmsg: String)
 }
+
+

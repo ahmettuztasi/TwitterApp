@@ -41,7 +41,6 @@ open class DatasourceController: UICollectionViewController, UICollectionViewDel
                     collectionView?.register(footerClass, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: NSStringFromClass(footerClass))
                 }
             }
-            
             collectionView?.reloadData()
         }
     }

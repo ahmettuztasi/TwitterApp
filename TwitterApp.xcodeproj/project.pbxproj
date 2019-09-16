@@ -22,7 +22,7 @@
 		5734D93D23216B4B001F5221 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5734D93C23216B4B001F5221 /* UserViewController.swift */; };
 		5753DC222321DD5000CD9E35 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5753DC212321DD5000CD9E35 /* Service.swift */; };
 		57698E3E232422CF00D9D091 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57698E3D232422CF00D9D091 /* User.swift */; };
-		578818C62329A1AF005145D9 /* CheckValid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578818C52329A1AF005145D9 /* CheckValid.swift */; };
+		578818C62329A1AF005145D9 /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578818C52329A1AF005145D9 /* ServiceError.swift */; };
 		578818D82329B31E005145D9 /* ToastWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578818D42329B31E005145D9 /* ToastWindow.swift */; };
 		578818D92329B31E005145D9 /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578818D52329B31E005145D9 /* Toast.swift */; };
 		578818DA2329B31E005145D9 /* ToastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 578818D62329B31E005145D9 /* ToastView.swift */; };
@@ -74,7 +74,7 @@
 		5734D93C23216B4B001F5221 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		5753DC212321DD5000CD9E35 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		57698E3D232422CF00D9D091 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		578818C52329A1AF005145D9 /* CheckValid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckValid.swift; sourceTree = "<group>"; };
+		578818C52329A1AF005145D9 /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
 		578818D32329B31E005145D9 /* Toaster.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Toaster.h; path = "../../../../../Downloads/How to use Toast/How to use Toast/Toast/Toaster.h"; sourceTree = "<group>"; };
 		578818D42329B31E005145D9 /* ToastWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ToastWindow.swift; path = "../../../../../Downloads/How to use Toast/How to use Toast/Toast/ToastWindow.swift"; sourceTree = "<group>"; };
 		578818D52329B31E005145D9 /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Toast.swift; path = "../../../../../Downloads/How to use Toast/How to use Toast/Toast/Toast.swift"; sourceTree = "<group>"; };
@@ -227,7 +227,7 @@
 		578818C42329A194005145D9 /* ErrorHandlers */ = {
 			isa = PBXGroup;
 			children = (
-				578818C52329A1AF005145D9 /* CheckValid.swift */,
+				578818C52329A1AF005145D9 /* ServiceError.swift */,
 			);
 			path = ErrorHandlers;
 			sourceTree = "<group>";
@@ -449,7 +449,7 @@
 				5734D93D23216B4B001F5221 /* UserViewController.swift in Sources */,
 				57ABED23232BF891004A2A97 /* HeaderViewController.swift in Sources */,
 				578818DB2329B31E005145D9 /* ToastCenter.swift in Sources */,
-				578818C62329A1AF005145D9 /* CheckValid.swift in Sources */,
+				578818C62329A1AF005145D9 /* ServiceError.swift in Sources */,
 				57698E3E232422CF00D9D091 /* User.swift in Sources */,
 				578818D92329B31E005145D9 /* Toast.swift in Sources */,
 				5734D93723216B06001F5221 /* HeaderCell.swift in Sources */,

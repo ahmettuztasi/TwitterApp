@@ -13,46 +13,83 @@ class TweetViewController: DatasourceController, ConnectionDelegate {
     let tweetCellId = "tweetCellId"
     let headerCellId = "headerCellId"
     
+    // Using for user id didselectitem, sending UserViewController
     var userId: Int?
     
+    // Tweet List
     var tweet : [Tweet]? {
         didSet {
-            collectionView!.reloadData()
+            collectionView?.reloadData()
+            activityIndicator.stopAnimating()
         }
     }
     
+    // Activity Indicator
+    let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    // Initilazation
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        
+        // Register viewCell to controller
+        collectionView?.register(TweetCell.self, forCellWithReuseIdentifier: tweetCellId)
+        collectionView?.register(HeaderCell.self, forCellWithReuseIdentifier: headerCellId)
+        
+        activityIndicatorStarter()
+        setupNavBar()
+        getTweets()
+    }
+    
+    // Success Connection to server
     func successConnection(response: Data) {
         do {
             self.tweet = try JSONDecoder().decode([Tweet].self, from: response)
-            
+            DispatchQueue.main.async{
+                self.collectionView?.reloadData()
+            }
         } catch { print(error)}
     }
     
+    // Failure Connection to server
     func errorConnection(message: String) {
         print("Response \(message)")
+        Toast(text: message, delay: 0, duration: 3).show()
     }
 
+    // Get all tweets in server
     func getTweets() {
         let service = Service(delegate: self)
         let headers = ["Content-Type":"application/json"]
         service.connectService(baseUrl: "http://localhost:3000/tweets", method: .get, header: headers, body: nil)
-        
     }
     
-
+    // Activity Indicator starter
+    func activityIndicatorStarter() {
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+    }
+    
+    // Get tweet's user image
+    func getImage(url: URL?) -> UIImage {
+        //profile image view
+        let data = try? Data(contentsOf: url!)
+        if(data == nil) {
+            Toast(text: "Internete bağlı değilsiniz", delay: 0, duration: 2).show()
+        } else {
+            return UIImage(data: data!)!
+        }
+        return UIImage()
+    }
     
     // Hide the status bar
     override var prefersStatusBarHidden: Bool {
         return true
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupNavBar()
-        collectionView?.backgroundColor = .white
-        collectionView?.register(TweetCell.self, forCellWithReuseIdentifier: tweetCellId)
-        collectionView?.register(HeaderCell.self, forCellWithReuseIdentifier: headerCellId)
-        getTweets()
     }
     
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -74,13 +111,14 @@ class TweetViewController: DatasourceController, ConnectionDelegate {
             if(self.tweet != nil){
                 
                 tweetCell.messageTextView.text = self.tweet![indexPath.item].tweetText
+                
                 tweetCell.fullNameTextView.text = String(self.tweet![indexPath.item].firstName + " " + self.tweet![indexPath.item].lastName)
                 tweetCell.userNameTextView.text = String(self.tweet![indexPath.item].profile)
                 
-                //profile image view
                 let url = URL(string: (tweet![indexPath.item].profileImgUrl))
-                let data = try? Data(contentsOf: url!)
-                tweetCell.profileImageView.image = UIImage(data: data!)
+               
+                tweetCell.profileImageView.image = getImage(url: url)
+               
             }
             return tweetCell
         }

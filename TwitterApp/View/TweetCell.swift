@@ -94,11 +94,11 @@ class TweetCell: DatasourceCell {
         
         profileImageView.anchor(self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, topConstant: 12, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: 50, heightConstant: 50)
         
-        fullNameTextView.anchor(self.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 4, bottomConstant: 0, rightConstant: 0, widthConstant: 170, heightConstant: 20)
+        fullNameTextView.anchor(self.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: nil, topConstant: 8, leftConstant: 4, bottomConstant: 0, rightConstant: 0, widthConstant: 0, heightConstant: 20)
         
         messageTextView.anchor(fullNameTextView.bottomAnchor, left: profileImageView.rightAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 4, bottomConstant: 30, rightConstant: 0, widthConstant: frame.width, heightConstant: frame.height)
         
-        userNameTextView.anchor(self.topAnchor, left: fullNameTextView.rightAnchor, bottom: nil, right: nil, topConstant: 2, leftConstant: 0, bottomConstant: 30, rightConstant: 0, widthConstant: 150, heightConstant: 27)
+        userNameTextView.anchor(self.topAnchor, left: fullNameTextView.rightAnchor, bottom: nil, right: nil, topConstant: 6.5, leftConstant: 3, bottomConstant: 30, rightConstant: 0, widthConstant: 150, heightConstant: 27)
         
         setupBottomButtons()
     }

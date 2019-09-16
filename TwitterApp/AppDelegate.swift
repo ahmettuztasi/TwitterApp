@@ -25,7 +25,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let mainVC = CustomTabBarController()
         window?.rootViewController = mainVC
-        
         return true
     }
     

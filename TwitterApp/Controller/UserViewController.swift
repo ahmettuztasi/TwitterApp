@@ -13,14 +13,19 @@ import Alamofire
 
 class UserViewController: DatasourceController, ConnectionDelegate, SendingDataTweetVCtoUserVC {
     
-    func sendDataToUserController(delege: Int) {
-        self.userId = delege
-    }
     
     let userCellId = "userCellId"
     let headerCellId = "headerCellId"
     
-    //User a ait tweet yok ise exception fırlatır.
+    // User model
+    var user : User? {
+        didSet {
+            collectionView?.reloadData()
+            activityIndicator.stopAnimating()
+        }
+    }
+    
+    // if not exist userId, throws exception
     var userId: Int? {
         didSet {
             do{
@@ -41,12 +46,43 @@ class UserViewController: DatasourceController, ConnectionDelegate, SendingDataT
         }
     }
     
+    // Actity Indicator
+    let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+    
+    // Initilazation
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Register viewCell to controller
+        collectionView?.register(UserCell.self, forCellWithReuseIdentifier: userCellId)
+        collectionView?.register( HeaderCell.self, forCellWithReuseIdentifier: headerCellId)
+        
+        collectionView?.delegate = self
+        collectionView?.dataSource = self
+        
+        // Activity Indicator
+        activityIndicatorStarter()
+        activityIndicator.startAnimating()
+        
+        //transition effect
+        self.modalTransitionStyle = .crossDissolve
+        
+        setupNavBar()
+    }
+    
+    // Delegetion from TweetViewController
+    func sendDataToUserController(delege: Int) {
+        self.userId = delege
+    }
+
+    // Get user by userId
     func getUserById(userId: Int) {
         let service = Service(delegate: self)
         let headers = ["Content-Type":"application/json"]
         service.connectService(baseUrl: "http://localhost:3000/users/\(userId)", method: .get, header: headers, body: nil)
     }
     
+    // Check user by userId
     func checkUserId(id: Int?) throws -> Bool {
         if id == nil {
             throw Check.Id(errmsg: "User'a ait tweet bulunamadı")
@@ -54,21 +90,18 @@ class UserViewController: DatasourceController, ConnectionDelegate, SendingDataT
         return true
     }
     
-    var user : User? {
-        didSet { collectionView?.reloadData()}
-    }
-    
+    // Success Connection to server
     func successConnection(response: Data) {
         do{
             let responseModel = try JSONDecoder().decode(User.self, from: response)
             self.user = responseModel
-        }catch{
-            
-        }
+        } catch { print(error)}
     }
     
+    // Failure Connection to server
     func errorConnection(message: String) {
         print("errorConnection: \(message)")
+        Toast(text: message, delay: 0, duration: 3).show()
     }
     
     // Hide the status bar
@@ -76,21 +109,15 @@ class UserViewController: DatasourceController, ConnectionDelegate, SendingDataT
         return true
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupNavBar()
-        
-        //transition effect
-        self.modalTransitionStyle = .crossDissolve
-        
-        collectionView?.delegate = self
-        collectionView?.dataSource = self
-      
-        collectionView?.backgroundColor = .white
-        collectionView?.register(UserCell.self, forCellWithReuseIdentifier: userCellId)
-        collectionView?.register( HeaderCell.self, forCellWithReuseIdentifier: headerCellId)
+    // Activity Indicator
+    func activityIndicatorStarter() {
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
     }
-    
+
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
@@ -116,8 +143,13 @@ class UserViewController: DatasourceController, ConnectionDelegate, SendingDataT
         }
         if user?.profileImgUrl != nil {
             let url = URL(string: (user?.profileImgUrl)!)
-            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
-            userCell?.profileImageView.image = UIImage(data: data!)
+            let data = try? Data(contentsOf: url!)
+            if(data == nil) {
+                Toast(text: "Internete bağlı değilsiniz", delay: 0, duration: 3).show()
+            } else {
+                userCell?.profileImageView.image = UIImage(data: data!)
+            }
+            
         }
         return userCell!
     }

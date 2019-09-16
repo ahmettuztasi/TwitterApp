@@ -24,12 +24,22 @@ class Service {
             
             switch response.result {
             case .success( _): do {
-                self.conDel?.successConnection(response: response.data!)
+                if(response.data == nil) {
+                    Toast(text: "internete bağlı değilsiniz", delay: 0, duration: 4).show()
+                } else {
+                    self.conDel?.successConnection(response: response.data!)
+                }
             }
                 
             case .failure( _): do {
-                self.conDel?.errorConnection(message: "Bağlantı gerçekleştirelemedi")
+                do {
+                    throw NSError(domain: "Sunucu Hatsaı", code: 1, userInfo: nil)
+                } catch let error as NSError {
+                    let tempError: String = String(describing: error)
+                    self.conDel?.errorConnection(message: tempError)
                 }
+                
+            }
             }
         }
     }
