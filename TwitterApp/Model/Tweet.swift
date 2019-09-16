@@ -17,12 +17,13 @@ class Tweet:  Decodable {
     let firstName: String
     let lastName: String
     let profile: String
+    let profileImgUrl: String
     let tweetText: String
     
     
     //MARK: Initialization
     
-    init(userId: Int, id: Int, firstName: String, lastName: String, profile: String, tweetText: String) {
+    init(userId: Int, id: Int, firstName: String, lastName: String, profile: String, profileImgUrl: String, tweetText: String) {
         
         // Initialize stored properties.
         self.userId = userId
@@ -30,6 +31,7 @@ class Tweet:  Decodable {
         self.firstName = firstName
         self.lastName = lastName
         self.profile = profile
+        self.profileImgUrl = profileImgUrl
         self.tweetText = tweetText
     }
 }

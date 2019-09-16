@@ -13,20 +13,18 @@ class TweetViewController: DatasourceController, ConnectionDelegate {
     let tweetCellId = "tweetCellId"
     let headerCellId = "headerCellId"
     
-    var userId: Int? {
-        didSet {
-            getTweets()
-        }
-    }
+    var userId: Int?
     
     var tweet : [Tweet]? {
-        didSet { collectionView?.reloadData()}
+        didSet {
+            collectionView!.reloadData()
+        }
     }
     
     func successConnection(response: Data) {
         do {
             self.tweet = try JSONDecoder().decode([Tweet].self, from: response)
-            collectionView?.reloadData()
+            
         } catch { print(error)}
     }
     
@@ -38,7 +36,10 @@ class TweetViewController: DatasourceController, ConnectionDelegate {
         let service = Service(delegate: self)
         let headers = ["Content-Type":"application/json"]
         service.connectService(baseUrl: "http://localhost:3000/tweets", method: .get, header: headers, body: nil)
+        
     }
+    
+
     
     // Hide the status bar
     override var prefersStatusBarHidden: Bool {
@@ -48,7 +49,6 @@ class TweetViewController: DatasourceController, ConnectionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavBar()
-        collectionView?.reloadData()
         collectionView?.backgroundColor = .white
         collectionView?.register(TweetCell.self, forCellWithReuseIdentifier: tweetCellId)
         collectionView?.register(HeaderCell.self, forCellWithReuseIdentifier: headerCellId)
@@ -72,9 +72,15 @@ class TweetViewController: DatasourceController, ConnectionDelegate {
         }else{
             let tweetCell = collectionView.dequeueReusableCell(withReuseIdentifier: tweetCellId, for: indexPath) as! TweetCell
             if(self.tweet != nil){
+                
                 tweetCell.messageTextView.text = self.tweet![indexPath.item].tweetText
                 tweetCell.fullNameTextView.text = String(self.tweet![indexPath.item].firstName + " " + self.tweet![indexPath.item].lastName)
                 tweetCell.userNameTextView.text = String(self.tweet![indexPath.item].profile)
+                
+                //profile image view
+                let url = URL(string: (tweet![indexPath.item].profileImgUrl))
+                let data = try? Data(contentsOf: url!)
+                tweetCell.profileImageView.image = UIImage(data: data!)
             }
             return tweetCell
         }

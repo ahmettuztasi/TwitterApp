@@ -16,17 +16,19 @@ class User:  Decodable {
     let firstName: String
     let lastName: String
     let profile: String
+    let profileImgUrl: String
     let age: Int
     
     //MARK: Initialization
     
-    init(id: Int, firstName: String, lastName: String, profile: String, age: Int) {
+    init(id: Int, firstName: String, lastName: String, profile: String, profileImgUrl: String, age: Int) {
         
         // Initialize stored properties.
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
         self.profile = profile
+        self.profileImgUrl = profileImgUrl
         self.age = age
     }
 }

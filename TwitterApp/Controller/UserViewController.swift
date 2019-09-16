@@ -111,8 +111,14 @@ class UserViewController: DatasourceController, ConnectionDelegate, SendingDataT
         if user?.age != nil{
             userCell?.bioTextView.text = "I am \(user!.age) years old"
         }
-        userCell?.usernameLabel.text = user?.profile
-        
+        if user?.profile != nil {
+            userCell?.usernameLabel.text = user?.profile
+        }
+        if user?.profileImgUrl != nil {
+            let url = URL(string: (user?.profileImgUrl)!)
+            let data = try? Data(contentsOf: url!) //make sure your image in this url does exist, otherwise unwrap in a if let check / try-catch
+            userCell?.profileImageView.image = UIImage(data: data!)
+        }
         return userCell!
     }
     
@@ -129,17 +135,21 @@ extension UserViewController {
         let navBar=UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 50))
         navBar.backgroundColor = .clear
         
-        let followButton = UIButton(type: .system)
-        followButton.setImage(#imageLiteral(resourceName: "back").withRenderingMode(.alwaysOriginal), for: .normal)
-        followButton.frame = CGRect(x: 8, y: 8, width: 25, height: 25)
-        followButton.addTarget(self, action: #selector(goBack), for: .touchDown)
+        let backButton = UIButton(type: .system)
+        backButton.setImage(#imageLiteral(resourceName: "back").withRenderingMode(.alwaysOriginal), for: .normal)
+        backButton.frame = CGRect(x: 8, y: 8, width: 25, height: 25)
+        backButton.addTarget(self, action: #selector(goBack), for: .touchDown)
+        
+        //for ui test
+        backButton.isAccessibilityElement = true
+        backButton.accessibilityIdentifier = "backButton"
         
         let composeButton = UIButton(type: .system)
         composeButton.setImage(#imageLiteral(resourceName: "more").withRenderingMode(.alwaysOriginal), for: .normal)
         composeButton.frame = CGRect(x: view.frame.width - 38, y: 8, width: 34, height: 25)
         
         self.view.addSubview(navBar)
-        self.view.addSubview(followButton)
+        self.view.addSubview(backButton)
         self.view.addSubview(composeButton)
     }
     

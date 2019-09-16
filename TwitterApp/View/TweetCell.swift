@@ -21,24 +21,22 @@ class TweetCell: DatasourceCell {
         return tv
     }()
     
-    var fullNameTextView: UITextView = {
-        let fullName = UITextView()
+    var fullNameTextView: UILabel = {
+        let fullName = UILabel()
         fullName.text = ""
         fullName.backgroundColor = .clear
         fullName.font = UIFont.boldSystemFont(ofSize: 18)
-        fullName.isEditable = false
         fullName.sizeToFit()
         fullName.translatesAutoresizingMaskIntoConstraints = true
         return fullName
     }()
     
-    var userNameTextView: UITextView = {
-        let userName = UITextView()
+    var userNameTextView: UILabel = {
+        let userName = UILabel()
         userName.text = ""
         userName.backgroundColor = .clear
         userName.textColor = UIColor.gray
         userName.font = UIFont.systemFont(ofSize: 14)
-        userName.isEditable = false
         userName.sizeToFit()
         userName.translatesAutoresizingMaskIntoConstraints = true
         return userName
@@ -49,6 +47,11 @@ class TweetCell: DatasourceCell {
         imageView.image = #imageLiteral(resourceName: "boy")
         imageView.layer.cornerRadius = 5
         imageView.clipsToBounds = true
+        
+        //for ui test
+        imageView.isAccessibilityElement = true
+        imageView.accessibilityIdentifier = "profileImageView"
+        
         return imageView
     }()
     
@@ -91,7 +94,7 @@ class TweetCell: DatasourceCell {
         
         profileImageView.anchor(self.topAnchor, left: self.leftAnchor, bottom: nil, right: nil, topConstant: 12, leftConstant: 12, bottomConstant: 0, rightConstant: 0, widthConstant: 50, heightConstant: 50)
         
-        fullNameTextView.anchor(self.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 4, bottomConstant: 0, rightConstant: 0, widthConstant: 170, heightConstant: 30)
+        fullNameTextView.anchor(self.topAnchor, left: profileImageView.rightAnchor, bottom: nil, right: nil, topConstant: 0, leftConstant: 4, bottomConstant: 0, rightConstant: 0, widthConstant: 170, heightConstant: 20)
         
         messageTextView.anchor(fullNameTextView.bottomAnchor, left: profileImageView.rightAnchor, bottom: bottomAnchor, right: rightAnchor, topConstant: 0, leftConstant: 4, bottomConstant: 30, rightConstant: 0, widthConstant: frame.width, heightConstant: frame.height)
         
